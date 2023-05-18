@@ -4,7 +4,7 @@ function wseg_nii = warp_images( ...
 % SPM deformation job
 clear job
 job.comp{1}.def = {deffwd_nii};
-job.comp{2}.id.space = {mnigeom_nii};
+job.comp{2}.id.space = {which(mnigeom_nii)};
 job.out{1}.pull.fnames = {seg_nii};
 job.out{1}.pull.savedir.saveusr = {out_dir};
 job.out{1}.pull.interp = interp;
