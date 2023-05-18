@@ -37,6 +37,8 @@ run_spm12.sh ${MATLAB_RUNTIME} function warp_images \
     0 \
     "${out_dir}"
 
+# Extract ROI signals from spm_con?? 
+
 
 # PDF
 make_pdf.sh
