@@ -39,12 +39,14 @@ run_spm12.sh ${MATLAB_RUNTIME} function warp_images \
 # Extract ROI signals from spm_con images 
 for con in "${spm_dir}"/con_????.nii.gz; do
     connum=$(basename "${con}" .nii.gz)
-    fslmeants -i "${con}" -o "${out_dir}/${connum}.txt" --label="${out_dir}"/wfsroi.nii
+    fslstats -K "${out_dir}"/wfsroi.nii "${con}" -m > "${out_dir}/${connum}.txt"
+    #fslmeants -i "${con}" -o "${out_dir}/${connum}.txt" --label="${out_dir}"/wfsroi.nii
 done
 
 # FIXME We are here. Convert fsl text file data to csv with empties removed
 # Get a list of indices to keep from the ROI image (convert to 0 based? not sure)
 # Get labels from the FS LUT ${FREESURFER_HOME}/FreeSurferColorLUT.txt
+# data_tocsv.py
 
 # PDF
 make_pdf.sh
