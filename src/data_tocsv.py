@@ -33,6 +33,8 @@ con['Label'] = range(1,con.shape[0]+1)
 # Add con name
 con['Contrast'] = conlabel
 
+print(con)
+
 # Merge region labels
 con = con.merge(
     lut[['Label', 'Region']],
