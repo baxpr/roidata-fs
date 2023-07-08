@@ -24,24 +24,28 @@ con = pandas.read_csv(
     )
 con.columns = ["Mean"]
 
-# Replace "missing" with nan
-con.Mean = con.Mean.apply(lambda x: float('nan') if x.startswith('missing') else float(x))
-
 # Get label values, assuming 1..N as in output of fslstats
 con['Label'] = range(1,con.shape[0]+1)
 
 # Add con name
+# FIXME get contrast names from SPM somehow?
 con['Contrast'] = conlabel
 
-print(con)
+# Replace "missing" with nan
+con.Mean = con.Mean.apply(lambda x: float('nan') if x.startswith('missing') else float(x))
 
 # Merge region labels
 con = con.merge(
     lut[['Label', 'Region']],
     on='Label',
+    how='left',
     )
 
-# FIXME get contrast names from SPM somehow?
+print(con)
+
+# Now drop NA rows
+con.dropna(inplace=True)
 
 print(con)
+
 
