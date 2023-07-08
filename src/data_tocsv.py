@@ -21,9 +21,11 @@ confile = f'../OUTPUTS/{conlabel}.txt'
 con = pandas.read_csv(
     confile,
     header=None, 
-    na_values='missing'
     )
 con.columns = ["Mean"]
+
+# Replace "missing" with nan
+con.Mean = con.Mean.apply(lambda x: float('nan') if x.startswith('missing') else float(x))
 
 # Get label values, assuming 1..N as in output of fslstats
 con['Label'] = range(1,con.shape[0]+1)
